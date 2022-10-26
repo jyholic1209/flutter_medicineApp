@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_myapp/components/myapp_constants.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddMedicinePage extends StatefulWidget {
   const AddMedicinePage({super.key});
@@ -12,6 +15,7 @@ class AddMedicinePage extends StatefulWidget {
 class _AddMedicinePageState extends State<AddMedicinePage> {
   // textField controller
   final _medicineNameController = TextEditingController();
+  File? _pickedImage;
 
   // 화면 종료시
   @override
@@ -50,12 +54,27 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
                 child: CircleAvatar(
                   radius: 40,
                   child: CupertinoButton(
-                      child: const Icon(
-                        CupertinoIcons.photo_camera_solid,
-                        size: 30,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {}),
+                      padding: _pickedImage == null ? null : EdgeInsets.zero,
+                      child: _pickedImage == null
+                          ? const Icon(
+                              CupertinoIcons.photo_camera_solid,
+                              size: 30,
+                              color: Colors.white,
+                            )
+                          : CircleAvatar(
+                              foregroundImage: FileImage(_pickedImage!),
+                              radius: 40,
+                            ),
+                      onPressed: () {
+                        ImagePicker()
+                            .pickImage(source: ImageSource.gallery)
+                            .then((xfile) {
+                          if (xfile == null) return;
+                          setState(() {
+                            _pickedImage = File(xfile.path);
+                          });
+                        });
+                      }),
                 ),
               ),
               const SizedBox(
