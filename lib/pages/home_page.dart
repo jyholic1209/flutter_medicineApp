@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
             appBar: AppBar(),
             body: _pages[_currentIndex],
             floatingActionButton: FloatingActionButton(
-              onPressed: _onAddMedicien,
+              onPressed: _onAddMedicine,
               child: const Icon(CupertinoIcons.add),
             ),
             floatingActionButtonLocation:
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _onAddMedicien() {
+  void _onAddMedicine() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const AddMedicinePage()));
   }
