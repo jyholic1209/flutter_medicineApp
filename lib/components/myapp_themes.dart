@@ -10,19 +10,29 @@ class MyAppThemes {
         splashColor: Colors.white,
         brightness: Brightness.light,
         textTheme: _textTheme,
-        visualDensity: VisualDensity.adaptivePlatformDensity,  // 자연스럽게 보임
+        appBarTheme: _appBarTheme,
+        // visualDensity: VisualDensity.adaptivePlatformDensity,  // 자연스럽게 보임
       );
-      
+
   // dark mode
   static ThemeData get darkTheme => ThemeData(
         fontFamily: 'GmarketSansTTF',
         primarySwatch: MyAppColors.primaryMeterialColor,
-        //  scaffoldBackgroundColor: Colors.white,
+        // dark mode
+        // scaffoldBackgroundColor: Colors.white,
         splashColor: Colors.white,
         brightness: Brightness.dark,
         textTheme: _textTheme,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        // visualDensity: VisualDensity.adaptivePlatformDensity,
       );
+
+  static const AppBarTheme _appBarTheme = AppBarTheme(
+    backgroundColor: Colors.white,
+    iconTheme: IconThemeData(
+      color: MyAppColors.primaryColor,
+    ),
+    elevation: 0,
+  );
 
   static const TextTheme _textTheme = TextTheme(
     headline4: TextStyle(

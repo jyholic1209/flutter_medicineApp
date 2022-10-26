@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_myapp/main.dart';
+import 'package:flutter_myapp/components/myapp_constants.dart';
 
 class AddMedicinePage extends StatelessWidget {
   const AddMedicinePage({super.key});
@@ -17,36 +17,40 @@ class AddMedicinePage extends StatelessWidget {
           // 입력폼에 언포커스 될때 처리
           FocusScope.of(context).unfocus();
         },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('어떤 약이예요?',
-                style: TextStyle(
-                    fontFamily: 'GmarketSansTTF',
-                    fontSize: 32,
-                    fontWeight: FontWeight.w400)),
-            Center(
-              child: CircleAvatar(
-                radius: 40,
-                child: CupertinoButton(
-                    child: const Icon(
-                      CupertinoIcons.photo_camera_solid,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {}),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: largeSpace,
               ),
-            ),
-            const Text(
-              '약 이름',
-              style: TextStyle(
-                fontFamily: 'GmarketSansTTF',
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+              Text('어떤 약이예요?', style: Theme.of(context).textTheme.headline4),
+              const SizedBox(
+                height: largeSpace,
               ),
-            ),
-            TextFormField()
-          ],
+              Center(
+                child: CircleAvatar(
+                  radius: 40,
+                  child: CupertinoButton(
+                      child: const Icon(
+                        CupertinoIcons.photo_camera_solid,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {}),
+                ),
+              ),
+              const SizedBox(
+                height: largeSpace + regularSpace,
+              ),
+              Text(
+                '약 이름',
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              TextFormField(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: SafeArea(
@@ -54,10 +58,7 @@ class AddMedicinePage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(
-                  fontFamily: 'GmarketSansTTF',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400)),
+              textStyle: Theme.of(context).textTheme.subtitle1),
           child: const Text('다음'),
         ),
       ),
