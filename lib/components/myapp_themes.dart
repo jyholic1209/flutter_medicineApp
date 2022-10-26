@@ -31,7 +31,7 @@ class MyAppThemes {
     iconTheme: IconThemeData(
       color: MyAppColors.primaryColor,
     ),
-    elevation: 0,
+    elevation: 0, // 경계선 지움
   );
 
   static const TextTheme _textTheme = TextTheme(
