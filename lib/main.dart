@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: MyAppThemes.lightTheme,
 
       home: const HomePage(),
-      // bulid 추가
+      // build 추가
       builder: ((context, child) => MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
           child: child!)),

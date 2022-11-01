@@ -24,6 +24,7 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
   // 화면 종료시
   @override
   void dispose() {
+    // ignore: todo
     // TODO: implement dispose
     _medicineNameController.dispose();
     super.dispose();
