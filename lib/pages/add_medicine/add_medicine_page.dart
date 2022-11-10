@@ -138,15 +138,22 @@ class _MedicineImageButtonState extends State<MedicineImageButton> {
   }
 
   void _onPressed(ImageSource source) {
-    ImagePicker().pickImage(source: source).then((xfile) {
-      if (xfile != null) {
-        setState(() {
-          _pickedImage = File(xfile.path);
-          widget.changedImageFile(_pickedImage);
-        });
-      }
-      Navigator.maybePop(context);
-    });
+    ImagePicker().pickImage(source: source).then(
+      (xfile) {
+        if (xfile != null) {
+          setState(() {
+            _pickedImage = File(xfile.path);
+            widget.changedImageFile(_pickedImage);
+          });
+        }
+        Navigator.maybePop(context);
+      },
+    ).onError(
+      (error, stackTrace) {
+        Navigator.pop(context);
+        showPermissionDenied(context, permission: '카메라 및 갤러리 접근');
+      },
+    );
   }
 }
 

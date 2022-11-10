@@ -4,7 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_myapp/components/myapp_colors.dart';
 import 'package:flutter_myapp/components/myapp_constants.dart';
-import 'package:flutter_myapp/components/myapp_widgets.dart';
+import 'package:flutter_myapp/main.dart';
+import 'package:flutter_myapp/models/medicine.dart';
+import 'package:flutter_myapp/services/image_file_service.dart';
+import '../../components/myapp_widgets.dart';
 import 'package:flutter_myapp/services/add_medicine_service.dart';
 import 'package:intl/intl.dart';
 
@@ -49,8 +52,40 @@ class AddAlarmPage extends StatelessWidget {
           // Text(medicineName),
         ],
       ),
-      bottomNavigationBar:
-          BottomSubmitButton(buttonText: '완료', onPressed: () {}),
+      bottomNavigationBar: BottomSubmitButton(
+          buttonText: '완료',
+          onPressed: () async {
+            bool result = false;
+            // 1. add alarm
+            for (var alarm in service.alarms) {
+              result = await notification.addNotification(
+                medicineId: medicineRepository.newId.toString(),
+                alarmTimeStr: alarm,
+                title: '$alarm 약 먹을 시간이예요!',
+                body: '$medicineName 복약했다고 알려주세요!',
+              );
+            }
+
+            if (!result) {
+              // ignore: use_build_context_synchronously
+              showPermissionDenied(context, permission: '알람');
+            }
+            // 2. save image(local path)
+            String? imageFilePath;
+            if (medicineImage != null) {
+              imageFilePath = await saveImageToLocalDirectory(medicineImage!);
+            }
+            // 3. add medicine model (hive)
+            final medicine = Medicine(
+              id: medicineRepository.newId,
+              name: medicineName,
+              imagePath: imageFilePath ??= '',
+              alarms: service.alarms.toList(),
+            );
+            medicineRepository.addMedicine(medicine);
+            // ignore: use_build_context_synchronously
+            Navigator.popUntil(context, (route) => route.isFirst);
+          }),
     );
   }
 
@@ -59,7 +94,7 @@ class AddAlarmPage extends StatelessWidget {
     final children = <Widget>[];
     // alarms 안의 열거 요소만큼 AlarmBox()를 생성
     children.addAll(
-      service.alarm.map(
+      service.alarms.map(
         (time) => AlarmBox(
           alarmTime: time,
           service: service,

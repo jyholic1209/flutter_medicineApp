@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_myapp/components/myapp_themes.dart';
 import 'package:flutter_myapp/pages/home_page.dart';
+import 'package:flutter_myapp/repositories/medicine_hive.dart';
+import 'package:flutter_myapp/repositories/medicine_repository.dart';
+import 'package:flutter_myapp/services/alarm_notification_service.dart';
 
-void main() {
+final notification = AlarmNotificationService();
+final hive = MedicineHive();
+final medicineRepository = MedicineRepository();
+Future<void> main() async {
+  // needed if you intend to initialize in the `main` function
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await notification.initializeTimeZone();
+  await notification.initializeNotification();
+  await hive.initializeHive();
   runApp(const MyApp());
 }
 

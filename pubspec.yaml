@@ -39,6 +39,17 @@ dependencies:
   # DateTime 포멧 변환용 패키지
   intl: ^0.17.0
 
+  # local_notification package => flutter_local_notifications, timezone, flutter_native_timezone
+  flutter_local_notifications: ^12.0.3
+  # Time zone database and time zone aware DateTime.
+  timezone: ^0.9.0
+  # A flutter plugin for getting the local timezone of the os.
+  flutter_native_timezone: ^2.0.0
+  permission_handler: ^10.2.0
+  path_provider: ^2.0.11
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,6 +60,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  hive_generator: ^2.0.0
+  build_runner: ^2.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
