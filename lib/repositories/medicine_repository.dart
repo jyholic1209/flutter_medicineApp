@@ -8,7 +8,7 @@ class MedicineRepository {
   Box<Medicine>? _medicineBox;
 
   Box<Medicine> get medicineBox {
-    _medicineBox ??= Hive.box(MedicineHiveBox.medicine);
+    _medicineBox ??= Hive.box<Medicine>(MedicineHiveBox.medicine);
     return _medicineBox!;
   }
 

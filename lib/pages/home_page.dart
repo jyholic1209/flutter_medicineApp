@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_myapp/components/myapp_colors.dart';
+import 'package:flutter_myapp/components/myapp_constants.dart';
 import 'package:flutter_myapp/pages/add_medicine/add_medicine_page.dart';
 import 'package:flutter_myapp/pages/history/history_page.dart';
 import 'package:flutter_myapp/pages/today/today_page.dart';
@@ -18,22 +19,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SafeArea(
-        top: false,
-        child: Scaffold(
-            appBar: AppBar(),
-            body: _pages[_currentIndex],
-            floatingActionButton: FloatingActionButton(
-              onPressed: _onAddMedicine,
-              child: const Icon(CupertinoIcons.add),
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            bottomNavigationBar: _buildBottomAppBar()),
-      ),
-    );
+    return Scaffold(
+        appBar: AppBar(),
+        body: Padding(
+          padding: pagePadding,
+          child: SafeArea(child: _pages[_currentIndex]),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _onAddMedicine,
+          child: const Icon(CupertinoIcons.add),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: _buildBottomAppBar());
   }
 
   BottomAppBar _buildBottomAppBar() {

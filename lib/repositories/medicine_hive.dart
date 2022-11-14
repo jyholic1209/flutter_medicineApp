@@ -8,7 +8,7 @@ class MedicineHive {
     await Hive.initFlutter();
     Hive.registerAdapter<Medicine>(MedicineAdapter());
 
-    Hive.openBox<Medicine>(MedicineHiveBox.medicine);
+    await Hive.openBox<Medicine>(MedicineHiveBox.medicine);
     log('initializeHive ${DateTime.now()}');
   }
 }
